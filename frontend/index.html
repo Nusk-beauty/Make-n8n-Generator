@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>PepFit Pro — Panel</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">PepFit <span class="pro">Pro</span></div>
+    <nav>
+      <button data-tab="clientes" class="tab active">Clientes</button>
+      <button data-tab="planes" class="tab">Planes</button>
+      <button data-tab="ai" class="tab">Agente IA</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="clientes" class="panel">
+      <div class="panel-left">
+        <h2>Clientes</h2>
+        <button id="btnNuevoCliente" class="btn primary">+ Nuevo</button>
+        <input id="buscar" placeholder="Buscar cliente" />
+        <ul id="listaClientes"></ul>
+      </div>
+      <div class="panel-right">
+        <div id="detalleCliente"></div>
+      </div>
+    </section>
+
+    <section id="planes" class="panel hidden">
+      <h2>Generador de Planes</h2>
+      <label>Cliente <select id="selCliente"></select></label>
+      <label>Duración<select id="selDuracion"><option value="7">7 días</option><option value="28">28 días</option></select></label>
+      <label>Enfoque<select id="selEnfoque"><option value="equilibrado">Equilibrado</option><option value="lowcarb">Low-carb</option></select></label>
+      <button id="btnGenerarPlan" class="btn primary">Generar plan</button>
+      <div id="planRender"></div>
+      <button id="btnGenerarPdf" class="btn">Generar PDF y enviar</button>
+    </section>
+
+    <section id="ai" class="panel hidden">
+      <h2>Agente IA — PepFit Pro (Gemini)</h2>
+      <div id="chatLog" class="chat"></div>
+      <form id="chatForm"><input id="chatInput" placeholder="Pregunta sobre nutrición o entreno..." /><button>Enviar</button></form>
+    </section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
