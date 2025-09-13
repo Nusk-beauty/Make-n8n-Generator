@@ -4,6 +4,42 @@ const router = express.Router();
 const sheets = require('../services/sheets');
 const { v4: uuidv4 } = require('uuid');
 
+// GET /api/clientes/:id
+router.get('/:id', async (req,res) => {
+    try {
+        const rows = await sheets.getRows();
+        const cliente = rows.map(r => ({
+            id: r[0],
+            nombre: r[1],
+            email: r[2],
+            telefono: r[3],
+            nacimiento: r[4],
+            sexo: r[5],
+            estatura: r[6],
+            peso: r[7],
+            objetivo: r[8],
+            nivel: r[9],
+            dias: r[10],
+            equipo: r[11],
+            preferencias: r[12],
+            alergias: r[13],
+            patologias: r[14],
+            historial: r[15],
+            notas: r[16],
+            createdAt: r[17]
+        })).find(c => c.id === req.params.id);
+
+        if (cliente) {
+            res.json(cliente);
+        } else {
+            res.status(404).json({ error: 'Cliente no encontrado' });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
 // GET /api/clientes
 router.get('/', async (req,res) => {
     try {

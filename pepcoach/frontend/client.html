@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Dashboard - PepFit Pro</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="client.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">PepFit Pro</div>
+    <nav>
+      <button data-tab="dashboard" class="btn active">Dashboard</button>
+      <button data-tab="entrenamiento" class="btn">Entrenamiento</button>
+      <button data-tab="nutricion" class="btn">Nutrición</button>
+      <button data-tab="progreso" class="btn">Progreso</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section id="dashboard" class="panel">
+      <h2>Mi Dashboard</h2>
+      <div class="dashboard-grid">
+        <div class="card">
+          <h3>Objetivo Principal</h3>
+          <p id="objetivoPrincipal">Cargando...</p>
+        </div>
+        <div class="card">
+          <h3>Rutina de Hoy</h3>
+          <div id="rutinaDiaria">Cargando...</div>
+        </div>
+        <div class="card">
+          <h3>Menú de Hoy</h3>
+          <div id="menuDiario">Cargando...</div>
+        </div>
+        <div class="card">
+          <h3>Mi Progreso</h3>
+          <a href="#" id="verProgreso">Ver informes detallados</a>
+        </div>
+        <div class="card">
+          <h3>Feedback Diario</h3>
+          <p>¿Cómo te sentiste hoy?</p>
+          <textarea id="feedbackDiario" placeholder="Ej: El entrenamiento fue genial, pero terminé muy cansado."></textarea>
+          <button id="enviarFeedback" class="btn primary">Enviar</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="entrenamiento" class="panel hidden">
+      <h2>Mi Rutina de Entrenamiento</h2>
+      <div id="planEntrenamiento">Cargando...</div>
+    </section>
+
+    <section id="nutricion" class="panel hidden">
+      <h2>Mi Plan de Nutrición</h2>
+      <div id="planNutricion">Cargando...</div>
+    </section>
+
+    <section id="progreso" class="panel hidden">
+      <h2>Mi Progreso</h2>
+      <p>Aquí verás tus fotos, medidas y evolución.</p>
+    </section>
+  </main>
+
+  <script src="client.js"></script>
+</body>
+</html>

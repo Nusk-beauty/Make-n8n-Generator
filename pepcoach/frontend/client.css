@@ -1,0 +1,39 @@
+/* Estilos para el Dashboard del Cliente */
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.card p, .card div {
+  color: #666;
+}
+
+#feedbackDiario {
+  width: 100%;
+  min-height: 80px;
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#enviarFeedback {
+  margin-top: 10px;
+  width: 100%;
+}
