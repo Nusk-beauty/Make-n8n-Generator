@@ -14,9 +14,26 @@
       <button data-tab="planes" class="btn">Planes</button>
       <button data-tab="ai" class="btn">Agente IA</button>
     </nav>
+    <button id="btnLogout" class="btn" style="display: none;">Cerrar sesión</button>
   </header>
 
-  <main class="container">
+  <section id="auth" class="panel">
+    <h2>Acceso</h2>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Contraseña" required>
+      <button type="submit">Entrar</button>
+      <button type="button" id="btnShowRegister">¿No tienes cuenta? Regístrate</button>
+    </form>
+    <form id="registerForm" class="hidden">
+      <input type="email" id="regEmail" placeholder="Email" required>
+      <input type="password" id="regPassword" placeholder="Contraseña" required>
+      <button type="submit">Registrar</button>
+      <button type="button" id="btnShowLogin">¿Ya tienes cuenta? Entra</button>
+    </form>
+  </section>
+
+  <main class="container hidden">
     <section id="clientes" class="panel">
       <div class="panel-left">
         <h2>Clientes</h2>

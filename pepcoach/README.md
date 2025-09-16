@@ -42,3 +42,15 @@ Proyecto listo para usar como base en Bolt.new / Lovable o desplegar localmente.
     docker compose up --build -d
     ```
 Frontend en http://localhost:8080, backend en http://localhost:4000.
+
+---
+
+## Visión a Futuro
+
+Para evolucionar `pepcoach` de un prototipo funcional a una plataforma profesional y escalable, se proponen los siguientes pasos clave:
+
+1.  **Migración de la Base de Datos**: Reemplazar el uso de Google Sheets por una base de datos más robusta y escalable como **Firestore**. Esto permitirá una mayor integridad de los datos, mejores capacidades de consulta y un rendimiento superior.
+
+2.  **Evolución del Frontend**: Refactorizar la aplicación frontend utilizando un framework moderno como **React** o **Vue**. Esto facilitará la creación de componentes reutilizables, mejorará la mantenibilidad del código y permitirá construir una interfaz de usuario más rica y compleja.
+
+3.  **Desarrollo de la Aplicación Móvil**: Construir una aplicación nativa para iOS y Android utilizando **React Native**. Esta aplicación se conectará al backend existente (ya securizado) y ofrecerá la mejor experiencia de usuario posible en dispositivos móviles, incluyendo el acceso a funcionalidades nativas como las notificaciones push.
