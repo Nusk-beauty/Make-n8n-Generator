@@ -1,0 +1,16 @@
+{
+  "name": "pepcoach",
+  "version": "1.0.0",
+  "description": "Proyecto listo para usar como base en Bolt.new / Lovable o desplegar localmente.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^14.1.1",
+    "pm2": "^6.0.11"
+  }
+}

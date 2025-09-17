@@ -1,5 +1,18 @@
 // frontend/app.js (module)
-const API_BASE = localStorage.getItem('pepcoach_api_base') || 'http://localhost:4000';
+// Auto-detect API base URL based on current host for deployment
+const getCurrentHost = () => {
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return 'http://localhost:4000';
+    } else if (window.location.hostname.includes('e2b.dev')) {
+        // For e2b sandbox deployment, use the specific backend URL
+        return 'https://4000-iuk7zf7x313r3x8b5qpbn-6532622b.e2b.dev';
+    } else {
+        // For other production deployments, assume backend is on port 4000 of the same host
+        return `${window.location.protocol}//${window.location.hostname}:4000`;
+    }
+};
+
+const API_BASE = localStorage.getItem('pepcoach_api_base') || getCurrentHost();
 
 const $ = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));

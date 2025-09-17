@@ -1,0 +1,5 @@
+2025-09-17T15:50:47: API key does not start with "SG.".
+2025-09-17T15:50:47: PepCoach backend listening on 4000
+2025-09-17T15:51:01: Error reading from Google Sheets: Google Sheets no configurado correctamente. Configure GOOGLE_SERVICE_ACCOUNT_JSON_BASE64 con credenciales válidas.
+2025-09-17T15:51:32: API key does not start with "SG.".
+2025-09-17T15:51:32: PepCoach backend listening on 4000

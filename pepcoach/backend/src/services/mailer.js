@@ -75,24 +75,39 @@ async function generatePdfBuffer({ cliente, plan, chartsBase64 }) {
 }
 
 async function sendReportEmail({ cliente, plan, chartsBase64 }) {
-    const pdfBuffer = await generatePdfBuffer({ cliente, plan, chartsBase64 });
-    const pdfBase64 = pdfBuffer.toString('base64');
+    // Check if SendGrid is properly configured
+    if (!process.env.SENDGRID_API_KEY || process.env.SENDGRID_API_KEY.includes('DEMO')) {
+        console.warn('SendGrid not configured properly - skipping email send');
+        throw new Error('Servicio de correo no configurado. Configure SENDGRID_API_KEY y SENDGRID_FROM para enviar correos.');
+    }
 
-    const msg = {
-        to: cliente.email,
-        from: process.env.SENDGRID_FROM,
-        subject: `Informe PepFit Pro — ${cliente.nombre}`,
-        text: `Hola ${cliente.nombre}, adjunto tu informe personalizado.`,
-        attachments: [
-            {
-                content: pdfBase64,
-                filename: 'Informe_PepFitPro.pdf',
-                type: 'application/pdf',
-                disposition: 'attachment'
-            }
-        ]
-    };
-    await sgMail.send(msg);
+    if (!process.env.SENDGRID_FROM || process.env.SENDGRID_FROM.includes('demo@')) {
+        throw new Error('Email remitente no configurado correctamente. Configure SENDGRID_FROM con un email verificado.');
+    }
+
+    try {
+        const pdfBuffer = await generatePdfBuffer({ cliente, plan, chartsBase64 });
+        const pdfBase64 = pdfBuffer.toString('base64');
+
+        const msg = {
+            to: cliente.email,
+            from: process.env.SENDGRID_FROM,
+            subject: `Informe PepFit Pro — ${cliente.nombre}`,
+            text: `Hola ${cliente.nombre}, adjunto tu informe personalizado.`,
+            attachments: [
+                {
+                    content: pdfBase64,
+                    filename: 'Informe_PepFitPro.pdf',
+                    type: 'application/pdf',
+                    disposition: 'attachment'
+                }
+            ]
+        };
+        await sgMail.send(msg);
+    } catch (error) {
+        console.error('Error sending email:', error);
+        throw new Error(`Error al enviar correo: ${error.message}`);
+    }
 }
 
 async function sendPlanZip({ cliente, plan }) {

@@ -1,0 +1,20 @@
+2025-09-17T15:51:30: Starting up http-server, serving ./frontend
+2025-09-17T15:51:30: 
+http-server version: 14.1.1
+2025-09-17T15:51:30: 
+http-server settings: 
+CORS: true
+Cache: 3600 seconds
+Connection Timeout: 120 seconds
+Directory Listings: visible
+AutoIndex: visible
+Serve GZIP Files: false
+Serve Brotli Files: false
+Default File Extension: none
+2025-09-17T15:51:30: 
+Available on:
+2025-09-17T15:51:30:   http://127.0.0.1:8080
+2025-09-17T15:51:30:   http://169.254.0.21:8080
+2025-09-17T15:51:30: Hit CTRL-C to stop the server
+2025-09-17T15:51:30: 
+2025-09-17T15:51:47: [Wed Sep 17 2025 15:51:47 GMT+0000 (Coordinated Universal Time)]  "GET /" "curl/7.88.1"
