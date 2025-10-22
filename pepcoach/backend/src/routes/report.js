@@ -2,9 +2,10 @@
 const express = require('express');
 const router = express.Router();
 const mailer = require('../services/mailer');
+const { reportValidationRules, handleValidationErrors } = require('../middleware/validators');
 
 // POST /api/report/generate -> devuelve PDF
-router.post('/generate', async (req,res) => {
+router.post('/generate', reportValidationRules(), handleValidationErrors, async (req,res) => {
     try {
         const { cliente, plan, chartsBase64 } = req.body;
         const buffer = await mailer.generatePdfBuffer({ cliente, plan, chartsBase64 });
@@ -18,7 +19,7 @@ router.post('/generate', async (req,res) => {
 });
 
 // POST /api/report/send -> genera PDF y lo envía por e-mail
-router.post('/send', async (req,res) => {
+router.post('/send', reportValidationRules(), handleValidationErrors, async (req,res) => {
     try {
         const { cliente, plan, chartsBase64 } = req.body;
         await mailer.sendReportEmail({ cliente, plan, chartsBase64 });

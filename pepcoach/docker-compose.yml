@@ -9,8 +9,6 @@ services:
     env_file: .env
     ports:
       - "4000:4000"
-    volumes:
-      - ./backend:/usr/src/app/backend
 
   frontend:
     build:

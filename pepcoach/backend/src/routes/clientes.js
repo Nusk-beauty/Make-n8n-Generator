@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const sheets = require('../services/sheets');
 const { v4: uuidv4 } = require('uuid');
+const { clienteValidationRules, handleValidationErrors } = require('../middleware/validators');
 
 // GET /api/clientes
 router.get('/', async (req,res) => {
@@ -36,7 +37,7 @@ router.get('/', async (req,res) => {
 });
 
 // POST /api/clientes
-router.post('/', async (req,res) => {
+router.post('/', clienteValidationRules(), handleValidationErrors, async (req,res) => {
     try {
         const c = req.body;
         c.id = uuidv4();

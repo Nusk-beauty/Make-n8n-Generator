@@ -11,7 +11,18 @@ const extraRouter = require('./routes/extra');
 const geminiService = require('./services/gemini');
 
 const app = express();
-app.use(cors());
+// Allow only whitelisted domains to connect
+const whitelist = (process.env.CORS_WHITELIST || 'http://localhost:8080,http://127.0.0.1:8080').split(',');
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (whitelist.includes(origin) || !origin) { // !origin allows for server-to-server requests
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+app.use(cors(corsOptions));
 app.use(express.json({ limit: '5mb' }));
 
 app.use('/api/clientes', clientesRouter);
