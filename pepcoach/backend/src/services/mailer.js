@@ -2,10 +2,21 @@
 const sgMail = require('@sendgrid/mail');
 const JSZip = require('jszip');
 const puppeteer = require('puppeteer');
+const qrcode = require('qrcode');
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-function renderReportHtml({ cliente, plan, chartsBase64 }) {
+async function generateQrCodeBase64(url) {
+    if (!url) return null;
+    try {
+        return await qrcode.toDataURL(url, { width: 160 });
+    } catch (err) {
+        console.error('Error generating QR code:', err);
+        return null;
+    }
+}
+
+function renderReportHtml({ cliente, plan, chartsBase64, qrCodeBase64 }) {
     // Plantilla de informe (simple y elegante). Puedes personalizar CSS.
     return `
 <!doctype html>
@@ -26,6 +37,7 @@ function renderReportHtml({ cliente, plan, chartsBase64 }) {
     pre { background: #f4f4f4; padding: 12px; border-radius: 8px; white-space: pre-wrap; word-break: break-all; }
     .chart { max-width: 100%; border-radius: 8px; margin-top: 12px; }
     .footer { text-align: center; font-size: 12px; color: #aaa; margin-top: 28px; }
+    .qr-container { text-align: center; margin-top: 24px; }
   </style>
 </head>
 <body>
@@ -58,24 +70,27 @@ function renderReportHtml({ cliente, plan, chartsBase64 }) {
   </div>
 
   ${chartsBase64 ? `<div class="section"><h3>Progreso</h3><img class="chart" src="data:image/png;base64,${chartsBase64}" /></div>` : ''}
+
+  ${qrCodeBase64 ? `<div class="section qr-container"><h3>Acceso Rápido</h3><img src="${qrCodeBase64}" alt="QR Code" /></div>` : ''}
 </div>
 </body>
 </html>
 `;
 }
 
-async function generatePdfBuffer({ cliente, plan, chartsBase64 }) {
+async function generatePdfBuffer({ cliente, plan, chartsBase64, qrUrl }) {
+    const qrCodeBase64 = await generateQrCodeBase64(qrUrl);
     const browser = await puppeteer.launch({ args: ['--no-sandbox','--disable-setuid-sandbox'] });
     const page = await browser.newPage();
-    const html = renderReportHtml({ cliente, plan, chartsBase64 });
+    const html = renderReportHtml({ cliente, plan, chartsBase64, qrCodeBase64 });
     await page.setContent(html, { waitUntil: 'networkidle0' });
     const buffer = await page.pdf({ format: 'A4', printBackground: true, margin: { top: '18mm', right: '12mm', bottom: '18mm', left: '12mm' } });
     await browser.close();
     return buffer;
 }
 
-async function sendReportEmail({ cliente, plan, chartsBase64 }) {
-    const pdfBuffer = await generatePdfBuffer({ cliente, plan, chartsBase64 });
+async function sendReportEmail({ cliente, plan, chartsBase64, qrUrl }) {
+    const pdfBuffer = await generatePdfBuffer({ cliente, plan, chartsBase64, qrUrl });
     const pdfBase64 = pdfBuffer.toString('base64');
 
     const msg = {

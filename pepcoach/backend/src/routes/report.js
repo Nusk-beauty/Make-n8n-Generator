@@ -6,8 +6,8 @@ const mailer = require('../services/mailer');
 // POST /api/report/generate -> devuelve PDF
 router.post('/generate', async (req,res) => {
     try {
-        const { cliente, plan, chartsBase64 } = req.body;
-        const buffer = await mailer.generatePdfBuffer({ cliente, plan, chartsBase64 });
+        const { cliente, plan, chartsBase64, qrUrl } = req.body;
+        const buffer = await mailer.generatePdfBuffer({ cliente, plan, chartsBase64, qrUrl });
         res.setHeader('Content-Type','application/pdf');
         res.setHeader('Content-Disposition', `attachment; filename=Informe_${(cliente.nombre||'cliente').replace(/\s+/g,'_')}.pdf`);
         res.send(buffer);
@@ -20,8 +20,8 @@ router.post('/generate', async (req,res) => {
 // POST /api/report/send -> genera PDF y lo envía por e-mail
 router.post('/send', async (req,res) => {
     try {
-        const { cliente, plan, chartsBase64 } = req.body;
-        await mailer.sendReportEmail({ cliente, plan, chartsBase64 });
+        const { cliente, plan, chartsBase64, qrUrl } = req.body;
+        await mailer.sendReportEmail({ cliente, plan, chartsBase64, qrUrl });
         res.json({ ok: true });
     } catch (err) {
         console.error(err);
