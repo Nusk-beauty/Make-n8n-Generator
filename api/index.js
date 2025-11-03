@@ -1,4 +1,4 @@
-// backend/src/index.js
+// api/index.js
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -34,5 +34,4 @@ app.post('/api/gemini', async (req, res) => {
 
 app.get('/health', (req,res) => res.json({ ok: true, ts: Date.now() }));
 
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`PepCoach backend listening on ${PORT}`));
+module.exports = app;

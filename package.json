@@ -1,21 +1,21 @@
 {
   "name": "pepcoach-backend",
   "version": "1.0.0",
-  "main": "src/index.js",
+  "main": "api/index.js",
   "scripts": {
-    "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "start": "node api/index.js",
+    "dev": "nodemon api/index.js",
+    "build": "echo 'No build step required'"
   },
   "dependencies": {
     "axios": "^1.4.0",
     "express": "^4.18.2",
-    "googleapis": "^119.0.0",
+    "googleapis": "^105.0.0",
     "jszip": "^3.10.1",
     "@sendgrid/mail": "^8.1.5",
     "puppeteer": "^21.0.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
-    "qrcode": "^1.5.3",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

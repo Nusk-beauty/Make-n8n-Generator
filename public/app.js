@@ -105,12 +105,11 @@ $('#btnGenerarPdf')?.addEventListener('click', async ()=>{
     const { cliente, plan } = window.lastPlan;
     // Aquí podrías añadir una lógica para generar un gráfico con Chart.js y pasarlo como base64
     const chartsBase64 = null;
-    const qrUrl = 'https://pep.coach/portal';
 
     const res = await fetch(`${API_BASE}/api/report/send`, {
         method:'POST',
         headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({ cliente, plan, chartsBase64, qrUrl })
+        body: JSON.stringify({ cliente, plan, chartsBase64 })
     });
     const r = await res.json();
     if (r.ok) alert('Informe enviado por correo');
