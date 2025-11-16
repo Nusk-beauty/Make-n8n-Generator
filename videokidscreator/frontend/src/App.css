@@ -1,0 +1,41 @@
+body {
+  background-color: #FFF6E9;
+  color: #333;
+  font-family: sans-serif;
+  margin: 0;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #FFDD88;
+  padding: 20px;
+  color: #333;
+}
+
+.App-header h1 {
+  margin: 0;
+}
+
+button {
+  background-color: #FF9FCF;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
