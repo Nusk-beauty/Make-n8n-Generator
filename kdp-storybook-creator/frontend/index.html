@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KDP Storybook Creator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>KDP Storybook Creator</h1>
+            <p>Generador Profesional de Cuentos Infantiles para Amazon KDP</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="form-section">
+            <h2>Configuración del Libro</h2>
+            <form id="storybook-form">
+                <div class="form-group">
+                    <label for="tipoLibro">Tipo de Libro:</label>
+                    <select id="tipoLibro" required>
+                        <option value="A. Cuento infantil ilustrado">A. Cuento infantil ilustrado</option>
+                        <option value="B. Libro para colorear">B. Libro para colorear</option>
+                        <option value="C. Cuento inclusivo / educativo">C. Cuento inclusivo / educativo</option>
+                        <option value="D. Combinado (cuento + colorear + inclusión)">D. Combinado (cuento + colorear + inclusión)</option>
+                    </select>
+                </div>
+
+                <div class="grid">
+                    <div class="form-group">
+                        <label for="edad">Edad del público:</label>
+                        <input type="text" id="edad" value="3 a 6 años" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tema">Tema principal:</label>
+                        <input type="text" id="tema" placeholder="Ej: Un dragón amable, El primer día de escuela..." required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="valorEducativo">Valor educativo:</label>
+                    <input type="text" id="valorEducativo" placeholder="Ej: Empatía, Autoestima, Diversidad..." required>
+                </div>
+
+                <div class="grid">
+                    <div class="form-group">
+                        <label for="numPaginas">Número de páginas:</label>
+                        <input type="number" id="numPaginas" value="24" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="tamano">Tamaño del libro:</label>
+                        <input type="text" id="tamano" value="8.5 x 8.5 pulgadas" required>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <div class="form-group">
+                        <label for="idioma">Idioma:</label>
+                        <input type="text" id="idioma" value="Español" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="formatoTexto">Formato de texto:</label>
+                        <select id="formatoTexto">
+                            <option value="minúsculas">minúsculas</option>
+                            <option value="MAYÚSCULAS">MAYÚSCULAS</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid">
+                    <div class="form-group">
+                        <label for="estiloVisual">Estilo visual:</label>
+                        <select id="estiloVisual">
+                            <option value="3D Pixar">3D Pixar</option>
+                            <option value="3D Cartoon">3D Cartoon</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="formatoNarrativo">Prosa o rima:</label>
+                        <select id="formatoNarrativo">
+                            <option value="Prosa">Prosa</option>
+                            <option value="Rima">Rima</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" id="submit-btn">Generar Libro Completo</button>
+            </form>
+        </section>
+
+        <section id="result-section" class="hidden">
+            <div class="result-header">
+                <h2>Libro Generado</h2>
+                <button id="copy-btn">Copiar Todo</button>
+                <button id="reset-btn">Nuevo Libro</button>
+            </div>
+            <div id="loading" class="hidden">
+                <div class="spinner"></div>
+                <p>Generando tu obra maestra... Esto puede tardar hasta un minuto.</p>
+            </div>
+            <div id="result-content" class="markdown-body"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 KDP Storybook Creator - Profesional & Escalable</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
