@@ -11,7 +11,7 @@ app.use(express.json());
 // Serve static files from the frontend directory
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-const PORT = process.env.PORT_STORYBOOK || 4001;
+const PORT = process.env.PORT || 3000;
 
 const SYSTEM_PROMPT = `Actúa como una IA experta editorial en creación de libros infantiles para Amazon KDP, especializada en:
 Storybooks ilustrados
@@ -129,6 +129,6 @@ Prosa o rima: ${formatoNarrativo}
   }
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`KDP Storybook Backend listening on ${PORT}`);
 });
