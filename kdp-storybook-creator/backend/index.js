@@ -13,64 +13,49 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 
 const PORT = process.env.PORT || 3000;
 
-const SYSTEM_PROMPT = `Actúa como una IA experta editorial en creación de libros infantiles para Amazon KDP, especializada en:
-Storybooks ilustrados
-Libros para colorear
-Cuentos inclusivos y educativos
-Producción lista para impresión profesional
-SEO avanzado para Amazon KDP
+const SYSTEM_PROMPT = `Actúa como una IA experta editorial en creación de libros infantiles para Amazon KDP.
+Tu misión es crear libros 100% listos para vender.
 
-Tu misión es crear libros 100% listos para vender, no borradores.
+DEBES RESPONDER ÚNICAMENTE CON UN OBJETO JSON VÁLIDO.
+No incluyas texto fuera del JSON.
 
-1️⃣ OPCIÓN DE TIPO DE LIBRO (OBLIGATORIO – ELEGIBLE)
-Ajusta automáticamente texto, imágenes y estructura según la opción elegida:
-🔘 A. Cuento infantil ilustrado
-🔘 B. Libro para colorear
-🔘 C. Cuento inclusivo / educativo
-🔘 D. Combinado (cuento + colorear + inclusión)
+Estructura del JSON:
+{
+  "datosLibro": { ... },
+  "tipoElegido": "...",
+  "portada": {
+    "titulo": "...",
+    "subtitulo": "...",
+    "textoContraportada": "...",
+    "promptImagen": "Prompt detallado para la portada en el estilo visual solicitado"
+  },
+  "interior": [
+    {
+      "pagina": "1",
+      "texto": "Párrafo 1\\nPárrafo 2",
+      "promptImagen": "Prompt detallado para esta página coherente con personajes y estilo"
+    },
+    ...
+  ],
+  "seo": {
+    "titulos": ["...", "...", "..."],
+    "descripcion": "...",
+    "keywords": ["...", "..."],
+    "categorias": ["...", "..."],
+    "publico": "..."
+  },
+  "medidasKDP": {
+    "sangrado": "...",
+    "tamanoCompleto": "...",
+    "instrucciones": "..."
+  }
+}
 
-2️⃣ DATOS DE ENTRADA DEL USUARIO
-Edad del público
-Tema principal
-Valor educativo (emociones, diversidad, autoestima, neurodivergencia, etc.)
-Número de páginas
-Tamaño del libro (default KDP)
-Idioma
-Texto en: MAYÚSCULAS o minúsculas
-Estilo visual
-Prosa o rima
+REGLAS SEGÚN TIPO DE LIBRO:
+- LIBRO PARA COLOREAR: Texto mínimo. Prompts de imagen deben especificar "Black and white, clean line art, no shading, coloring book style".
+- CUENTO INCLUSIVO/ILUSTRADO: Texto narrativo. Prompts de imagen deben ser detallados y coherentes.
 
-3️⃣ ADAPTACIÓN SEGÚN TIPO DE LIBRO
-🎨 SI ES LIBRO PARA COLOREAR: Texto mínimo o inexistente. Ilustraciones en Blanco y negro, Trazos limpios, Sin sombras ni grises. Una ilustración por página, Motivos grandes, aptos para niños, Sin texto dentro de la imagen.
-🧠 SI ES CUENTO INCLUSIVO / EDUCATIVO: Lenguaje respetuoso, calmado y positivo. Enfoque en: Emociones, Diversidad, Neurodivergencia, Empatía y autoestima. Ritmo suave, Mensaje educativo integrado (no forzado), Final tranquilizador.
-📘 SI ES CUENTO ILUSTRADO O COMBINADO: Páginas dobles, 2 párrafos por imagen, Texto + prompt de imagen en cada doble página, Coherencia total de personajes y estilo.
-
-4️⃣ FORMATO INTERIOR (OBLIGATORIO)
-PÁGINA X–Y
-Texto: "Párrafo 1 \n Párrafo 2"
-Prompt de imagen: (Ilustración infantil profesional coherente con el texto y personajes)
-
-5️⃣ PORTADA + CONTRAPORTADA + LOMO (KDP READY)
-📕 PORTADA: Título optimizado SEO, Subtítulo opcional, Prompt de imagen atractivo, Diseñada para destacar en Amazon.
-📗 CONTRAPORTADA: Texto emocional + SEO, Enfoque en padres y educadores, Beneficio claro del libro.
-📙 LOMO: Texto adaptado automáticamente al número de páginas.
-
-6️⃣ MEDIDAS AMAZON KDP
-Usa siempre estándares KDP. Calcula: Sangrado, Tamaño exacto de portada completa. Indica cómo subir: Interior, Portada.
-
-7️⃣ SEO AMAZON KDP (OBLIGATORIO)
-Genera: 3 títulos optimizados, Descripción larga KDP, 7 keywords, Categorías recomendadas, Público objetivo.
-
-8️⃣ ORDEN DE ENTREGA FINAL
-1. Datos del libro
-2. Tipo de libro elegido
-3. Interior página a página
-4. Prompts de imágenes
-5. Portada, contraportada y lomo
-6. SEO Amazon KDP
-7. Guía rápida de publicación
-
-🧠 REGLA FINAL: Si el libro no puede subirse a Amazon KDP sin tocar nada, no está terminado.`;
+ESTILO VISUAL: Aplicar el estilo solicitado (3D Pixar, 3D Cartoon, etc.) en todos los prompts de imagen.`;
 
 app.post('/api/generate', async (req, res) => {
   const {
@@ -108,21 +93,35 @@ Prosa o rima: ${formatoNarrativo}
     const body = {
       contents: [{
         parts: [{
-          text: `${SYSTEM_PROMPT}\n\nDATOS DEL LIBRO A GENERAR:\n${userPrompt}`
+          text: `${SYSTEM_PROMPT}\n\nDATOS DEL LIBRO A GENERAR:\n${userPrompt}\n\nRECUERDA: SOLO RESPONDE CON JSON.`
         }]
-      }]
+      }],
+      generationConfig: {
+        responseMimeType: "application/json"
+      }
     };
 
     const response = await axios.post(url, body, { headers: { 'Content-Type': 'application/json' } });
 
-    const resultText = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    let resultText = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
     if (!resultText) {
-      console.error('API Response:', JSON.stringify(response.data));
-      throw new Error('No se recibió respuesta de la IA o el formato de respuesta cambió');
+      throw new Error('No se recibió respuesta de la IA');
     }
 
-    res.json({ result: resultText });
+    const bookData = JSON.parse(resultText);
+
+    // Generar URLs de imágenes usando Pollinations.ai
+    // Portada
+    bookData.portada.urlImagen = `https://gen.pollinations.ai/image/${encodeURIComponent(bookData.portada.promptImagen)}?width=1024&height=1024&nologo=true&seed=${Math.floor(Math.random() * 1000)}`;
+
+    // Interior
+    for (let i = 0; i < bookData.interior.length; i++) {
+      const page = bookData.interior[i];
+      page.urlImagen = `https://gen.pollinations.ai/image/${encodeURIComponent(page.promptImagen)}?width=1024&height=1024&nologo=true&seed=${Math.floor(Math.random() * 1000)}`;
+    }
+
+    res.json({ result: bookData });
   } catch (err) {
     console.error('Error in generate:', err.response?.data || err.message);
     res.status(500).json({ error: err.message });
