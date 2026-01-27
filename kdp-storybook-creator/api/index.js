@@ -128,6 +128,10 @@ Prosa o rima: ${formatoNarrativo}
   }
 });
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`KDP Storybook Backend listening on ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`KDP Storybook Backend listening on ${PORT}`);
+  });
+}
+
+module.exports = app;
