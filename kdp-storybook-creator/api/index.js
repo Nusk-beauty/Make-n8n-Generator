@@ -1,5 +1,5 @@
 const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '.env') });
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
@@ -8,8 +8,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve static files from the frontend directory
-app.use(express.static(path.join(__dirname, '../frontend')));
+// Serve static files (only for local testing, Vercel uses /public)
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 const PORT = process.env.PORT || 3000;
 
