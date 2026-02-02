@@ -8,8 +8,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Serve static files (only for local testing, Vercel uses /public)
-app.use(express.static(path.join(__dirname, '..', 'public')));
+// Serve static files (only for local testing, Vercel serves from root)
+app.use(express.static(path.join(__dirname, '..')));
 
 const PORT = process.env.PORT || 3000;
 
@@ -55,7 +55,7 @@ REGLAS SEGÚN TIPO DE LIBRO:
 - LIBRO PARA COLOREAR: Texto mínimo. Prompts de imagen deben especificar "Black and white, clean line art, no shading, coloring book style".
 - CUENTO INCLUSIVO/ILUSTRADO: Texto narrativo. Prompts de imagen deben ser detallados y coherentes.
 
-ESTILO VISUAL: Aplicar el estilo solicitado (3D Pixar, 3D Cartoon, etc.) en todos los prompts de imagen.`;
+ESTILO VISUAL: Aplicar el estilo solicitado (3D Pixar, 3D Cartoon, Clay, etc.) en todos los prompts de imagen.`;
 
 app.post('/api/generate', async (req, res) => {
   const {
@@ -128,6 +128,7 @@ Prosa o rima: ${formatoNarrativo}
   }
 });
 
+// For local testing
 if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`KDP Storybook Backend listening on ${PORT}`);

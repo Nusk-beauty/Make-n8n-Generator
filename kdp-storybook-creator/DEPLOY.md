@@ -1,24 +1,21 @@
 # Despliegue en Vercel - KDP Storybook Creator
 
-Esta aplicación está estructurada para un despliegue sencillo en Vercel.
+Esta versión está optimizada al máximo para Vercel. Sigue estos pasos:
 
-### Pasos para el Despliegue:
-
-1. **Subir a GitHub**: Asegúrate de que tu código esté en un repositorio de GitHub.
-2. **Importar en Vercel**:
-   - Ve a [Vercel](https://vercel.com) y selecciona **"Create a New Project"**.
+1. **Subir a GitHub**: Asegúrate de que los cambios estén en tu repositorio de GitHub.
+2. **Crear nuevo proyecto en Vercel**:
+   - Ve a [Vercel](https://vercel.com).
+   - Haz clic en **"Add New"** > **"Project"**.
    - Importa tu repositorio.
-3. **Configuración Crucial**:
-   - **Root Directory**: Haz clic en **"Edit"** y selecciona la carpeta `kdp-storybook-creator`. **Esto es fundamental.**
-   - Vercel detectará automáticamente la configuración de Node.js y los archivos estáticos.
+3. **Configurar el proyecto**:
+   - **Root Directory**: **¡IMPORTANTE!** Selecciona la carpeta `kdp-storybook-creator`.
+   - **Framework Preset**: Déjalo en `Other`.
 4. **Variables de Entorno**:
-   - Ve a la pestaña **"Environment Variables"**.
-   - Añade `GEMINI_API_KEY` con tu clave de Google AI Studio.
-5. **Finalizar**: Haz clic en **"Deploy"**.
+   - En la sección **Environment Variables**, añade:
+     - `GEMINI_API_KEY`: Tu clave de API de Google Gemini (Google AI Studio).
+5. **Desplegar**: Haz clic en **"Deploy"**.
 
-### Estructura del Proyecto:
-- `/api`: Contiene el backend (Serverless Functions).
-- `/public`: Contiene el frontend (HTML, CSS, JS).
-- `vercel.json`: Configura las rutas para que todo funcione coordinado.
-
-¡Listo! Tu app estará disponible en la URL que te proporcione Vercel.
+**Estructura Técnica**:
+- El frontend está en la raíz (`index.html`, `style.css`, `script.js`).
+- El backend está en `api/generate.js` (Serverless Function).
+- Vercel servirá automáticamente el frontend en `/` y el backend en `/api/generate`.
