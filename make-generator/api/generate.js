@@ -8,7 +8,10 @@ app.use(cors());
 app.use(express.json());
 
 const path = require('path');
-app.use(express.static(path.join(__dirname, '../public')));
+// Solo sirve estáticos en local. En Vercel, se encarga vercel.json
+if (process.env.NODE_ENV !== 'production') {
+    app.use(express.static(path.join(__dirname, '../public')));
+}
 
 const SYSTEM_PROMPT = `Actúa como un Ingeniero Experto en Automatizaciones, especialista en Make.com (anteriormente Integromat) y n8n. Tu objetivo es convertir descripciones en lenguaje natural o flujos de n8n en configuraciones completas de Make.com.
 
