@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Automation Generator — Expert IA</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Make <span class="accent">Generator</span></h1>
+            <p>Convierte lenguaje natural o flujos n8n en automatizaciones de Make.com optimizadas.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="card">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="natural">Lenguaje Natural</button>
+                <button class="tab-btn" data-tab="n8n">Desde n8n (JSON)</button>
+            </div>
+
+            <div id="natural" class="tab-content active">
+                <label for="prompt">Describe tu automatización:</label>
+                <textarea id="prompt" placeholder="Ej: Cuando reciba un email con una factura, guárdala en Google Drive y avísame por Slack..."></textarea>
+            </div>
+
+            <div id="n8n" class="tab-content">
+                <label for="n8nJson">Pega aquí el JSON de n8n:</label>
+                <textarea id="n8nJson" placeholder='{"nodes": [...], "connections": {...}}'></textarea>
+            </div>
+
+            <div class="options">
+                <div class="option-group">
+                    <label for="experience">Nivel de experiencia:</label>
+                    <select id="experience">
+                        <option value="beginner">Principiante (Explicaciones detalladas)</option>
+                        <option value="intermediate">Intermedio</option>
+                        <option value="advanced">Avanzado (Directo al grano)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button id="generateBtn" class="btn-primary">Generar Automatización</button>
+        </section>
+
+        <section id="resultSection" class="card hidden">
+            <h2>Resultado de la Generación</h2>
+
+            <div class="result-box">
+                <h3>1. Estrategia y Explicación</h3>
+                <div id="explanation" class="markdown-body"></div>
+            </div>
+
+            <div class="result-box">
+                <h3>2. Configuración de Módulos (Blueprint)</h3>
+                <div class="code-header">
+                    <span>JSON Blueprint</span>
+                    <button id="copyBtn" class="btn-secondary btn-sm">Copiar</button>
+                </div>
+                <pre><code id="blueprint"></code></pre>
+            </div>
+
+            <div class="result-box">
+                <h3>3. Guía Paso a Paso</h3>
+                <div id="stepByStep" class="markdown-body"></div>
+            </div>
+        </section>
+
+        <div id="loader" class="loader-container hidden">
+            <div class="loader"></div>
+            <p>Diseñando el flujo más eficiente...</p>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Make Automation Gen. Estrategia Pro: Menos operaciones, Máximo ahorro.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
