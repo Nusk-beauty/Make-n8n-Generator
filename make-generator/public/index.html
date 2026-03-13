@@ -26,6 +26,11 @@
 
             <div id="natural" class="tab-content active">
                 <label for="prompt">Describe tu automatización:</label>
+                <div class="template-chips">
+                    <span class="chip" onclick="setPrompt('Pinterest Skincare')">✨ Pinterest Skincare</span>
+                    <span class="chip" onclick="setPrompt('Auto-responder Gmail')">📧 Gmail Auto-reply</span>
+                    <span class="chip" onclick="setPrompt('Notificador Stocks')">📈 Stock Alerts</span>
+                </div>
                 <textarea id="prompt" placeholder="Ej: Cuando reciba un email con una factura, guárdala en Google Drive y avísame por Slack..."></textarea>
             </div>
 

@@ -8,6 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let activeTab = 'natural';
 
+    window.setPrompt = (type) => {
+        const textarea = document.getElementById('prompt');
+        if (type === 'Pinterest Skincare') {
+            textarea.value = "Crea un sistema de 3 escenarios para Pinterest Skincare. Escenario 1: Gemini genera ideas de pines y las guarda en Google Sheets. Escenario 2: Busca pines pendientes, genera imágenes con Pollinations.ai y publica en Pinterest directamente. Escenario 3: Actualiza el estado a 'publicado'. Optimiza para el plan gratuito de Make (menos de 1000 ops).";
+        } else if (type === 'Auto-responder Gmail') {
+            textarea.value = "Cuando llegue un correo a Gmail, usa la IA para clasificarlo. Si es una duda técnica, responde educadamente y guarda el contacto en una hoja de Google Sheets. Si es spam, bórralo.";
+        } else if (type === 'Notificador Stocks') {
+            textarea.value = "Cada mañana a las 9:00, consulta el precio de las acciones de Apple y Tesla. Si han subido más de un 2%, envíame un mensaje por Telegram con un resumen.";
+        }
+    };
+
     // Tab switching
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
