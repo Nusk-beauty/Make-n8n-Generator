@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.setPrompt = (type) => {
         const textarea = document.getElementById('prompt');
         if (type === 'Pinterest Skincare') {
-            textarea.value = "Crea un sistema de 3 escenarios para Pinterest Skincare. Escenario 1: Gemini genera ideas de pines y las guarda en Google Sheets. Escenario 2: Busca pines pendientes, genera imágenes con Pollinations.ai y publica en Pinterest directamente. Escenario 3: Actualiza el estado a 'publicado'. Optimiza para el plan gratuito de Make (menos de 1000 ops).";
+            textarea.value = "Crea un sistema de Pinterest Skincare nivel 'Professional Creator'. Escenario 1: Gemini genera ideas y prompts. Escenario 2: Usa Google Slides como plantilla (templates en Drive) para poner texto sobre las imágenes de Pollinations.ai, descarga el resultado y publícalo usando el módulo nativo de Pinterest de Make. Optimiza para menos de 1000 operaciones al mes.";
         } else if (type === 'Auto-responder Gmail') {
             textarea.value = "Cuando llegue un correo a Gmail, usa la IA para clasificarlo. Si es una duda técnica, responde educadamente y guarda el contacto en una hoja de Google Sheets. Si es spam, bórralo.";
         } else if (type === 'Notificador Stocks') {
