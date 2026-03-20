@@ -2,8 +2,20 @@
   "version": 2,
   "rewrites": [
     {
+      "source": "/api/pinterest/(.*)",
+      "destination": "/api/pinterest-generate.js"
+    },
+    {
       "source": "/api/(.*)",
       "destination": "/api/generate.js"
+    },
+    {
+      "source": "/pinterest/(.*)",
+      "destination": "/public/pinterest/$1"
+    },
+    {
+      "source": "/pinterest",
+      "destination": "/public/pinterest/index.html"
     },
     {
       "source": "/(.*)",

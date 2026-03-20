@@ -22,10 +22,19 @@
             <div class="tabs">
                 <button class="tab-btn active" data-tab="natural">Lenguaje Natural</button>
                 <button class="tab-btn" data-tab="n8n">Desde n8n (JSON)</button>
+                <a href="/pinterest" class="tab-link" style="margin-left: auto; text-decoration: none; font-weight: 600; color: #e60023; display: flex; align-items: center; gap: 5px;">
+                    <span style="background: #e60023; color: white; border-radius: 50%; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px;">P</span>
+                    Pinterest Dashboard
+                </a>
             </div>
 
             <div id="natural" class="tab-content active">
                 <label for="prompt">Describe tu automatización:</label>
+                <div class="template-chips">
+                    <span class="chip" onclick="setPrompt('Pinterest Skincare')">✨ Pinterest Skincare</span>
+                    <span class="chip" onclick="setPrompt('Auto-responder Gmail')">📧 Gmail Auto-reply</span>
+                    <span class="chip" onclick="setPrompt('Notificador Stocks')">📈 Stock Alerts</span>
+                </div>
                 <textarea id="prompt" placeholder="Ej: Cuando reciba un email con una factura, guárdala en Google Drive y avísame por Slack..."></textarea>
             </div>
 
