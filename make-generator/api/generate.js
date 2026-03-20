@@ -39,7 +39,8 @@ Debes responder SIEMPRE con estas tres secciones claramente delimitadas por las 
 - Qué hace.
 - Configuración recomendada de CADA opción importante.
 - Cómo conectar los datos del módulo anterior (Mapping).
-- Consejos para evitar fallos comunes).
+- Pre-configuración necesaria (ej: Cabeceras en Google Sheets, Variables en Slides {{variable}}).
+- Consejos para evitar fallos comunes y optimizar para el plan gratuito de Make).
 [/EXPLANATION]
 
 Si el usuario provee un JSON de n8n, analiza sus nodos y conexiones y replícalos fielmente pero optimizados para la lógica de Make.`;

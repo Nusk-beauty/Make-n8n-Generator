@@ -59,6 +59,41 @@ header p {
     margin-bottom: 30px;
 }
 
+.template-chips {
+    margin-bottom: 25px;
+}
+
+.chip-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+.chips-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.chip {
+    background-color: #f3f4f6;
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.chip:hover {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
 .tabs {
     display: flex;
     gap: 10px;

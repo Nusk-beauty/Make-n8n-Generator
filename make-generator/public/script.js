@@ -1,3 +1,19 @@
+// Global function to set prompt from chips
+window.setPrompt = function(title, text) {
+    const promptArea = document.getElementById('prompt');
+    const naturalTab = document.querySelector('[data-tab="natural"]');
+
+    // Switch to natural tab
+    naturalTab.click();
+
+    // Set text
+    promptArea.value = text;
+    promptArea.focus();
+
+    // Visual feedback
+    console.log(`Cargada plantilla: ${title}`);
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');

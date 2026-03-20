@@ -19,6 +19,15 @@
 
     <main class="container">
         <section class="card">
+            <div class="template-chips">
+                <span class="chip-label">Plantillas rápidas:</span>
+                <div class="chips-container">
+                    <button class="chip" onclick="setPrompt('Pinterest Skincare', 'ESCENARIO ÚNICO: Generar y publicar 45 PINES virales de skincare semanalmente (Maximizando Make Free). Módulos: Scheduler (Sunday), Gemini (JSON 45 pins), Iterator, Sheets (Add Row), Slides (Replace Text & Export PNG), Pinterest (Native Module), Sheets (Update Status). Incluir paso a paso de pre-configuración de Google Cloud y Pinterest App.')">Pinterest Viral Pro (45/semana)</button>
+                    <button class="chip" onclick="setPrompt('Email a Google Drive', 'Cuando reciba un email con un archivo adjunto de tipo factura, guardarlo en una carpeta específica de Google Drive y notificar por Slack.')">Email a Drive</button>
+                    <button class="chip" onclick="setPrompt('Lead Magnet', 'Cuando alguien complete un formulario de Typeform, generar un PDF personalizado con su nombre y enviarlo por email usando SendGrid.')">Lead Magnet</button>
+                </div>
+            </div>
+
             <div class="tabs">
                 <button class="tab-btn active" data-tab="natural">Lenguaje Natural</button>
                 <button class="tab-btn" data-tab="n8n">Desde n8n (JSON)</button>
