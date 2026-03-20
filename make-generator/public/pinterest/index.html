@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinterest Dashboard — Digital Curator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <span class="p-icon">P</span>
+            <h1>Pinterest Pro</h1>
+        </div>
+        <nav>
+            <button class="nav-item active" data-section="overview">📊 Resumen</button>
+            <button class="nav-item" data-section="automation">⚡ Automatización</button>
+            <button class="nav-item" data-section="boards">📋 Tableros</button>
+            <button class="nav-item" data-section="metrics">📈 Métricas & ROI</button>
+        </nav>
+        <div class="user-profile">
+            <div class="avatar">N</div>
+            <span>Nuria Duran</span>
+        </div>
+    </div>
+
+    <main class="content">
+        <header class="content-header">
+            <h2 id="section-title">Dashboard de Pinterest</h2>
+            <div class="header-actions">
+                <button class="btn btn-secondary">Vincular Pinterest</button>
+                <button class="btn btn-primary" id="generate-btn">+ Nuevo Pin IA</button>
+            </div>
+        </header>
+
+        <section id="overview" class="dashboard-section active">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-label">Vistas Mensuales</span>
+                    <span class="stat-value">124.5K</span>
+                    <span class="stat-change positive">+12% vs mes ant.</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Pins Publicados</span>
+                    <span class="stat-value">182</span>
+                    <span class="stat-change">45 esta semana</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Clicks al Link</span>
+                    <span class="stat-value">3.2K</span>
+                    <span class="stat-change positive">+8% conv.</span>
+                </div>
+            </div>
+
+            <div class="chart-container card">
+                <h3>Crecimiento de Audiencia</h3>
+                <canvas id="growthChart"></canvas>
+            </div>
+        </section>
+
+        <section id="automation" class="dashboard-section">
+            <div class="card">
+                <h3>Publicación Inteligente</h3>
+                <p class="description">VINCULA TU PINTEREST, selecciona tus tableros estratégicos y deja que la magia suceda.</p>
+
+                <div class="automation-settings">
+                    <div class="form-group">
+                        <label>Frecuencia de Publicación</label>
+                        <select>
+                            <option>45 pins / semana (Recomendado Free Tier)</option>
+                            <option>10 pins / día (Pro)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Estrategia de Contenido</label>
+                        <div class="chips-container">
+                            <span class="chip active">Skincare</span>
+                            <span class="chip active">Rutinas</span>
+                            <span class="chip active">Ingredientes</span>
+                            <span class="chip">+ Añadir nicho</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Activar Automatización</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="metrics" class="dashboard-section">
+            <div class="card">
+                <h3>Análisis de ROI</h3>
+                <p class="description">Análisis profundo de tu embudo de ventas. Sabrás qué pines generan dinero.</p>
+                <div class="roi-table-container">
+                    <table class="roi-table">
+                        <thead>
+                            <tr>
+                                <th>Pin Viral</th>
+                                <th>Vistas</th>
+                                <th>Clicks</th>
+                                <th>Ingresos Est.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Rutina Vitamina C</td>
+                                <td>45.2K</td>
+                                <td>1.2K</td>
+                                <td>€450</td>
+                            </tr>
+                            <tr>
+                                <td>Errores Retinol</td>
+                                <td>38.1K</td>
+                                <td>950</td>
+                                <td>€320</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="modal" class="modal hidden">
+        <div class="modal-content card">
+            <h3>Generar Contenido Viral</h3>
+            <textarea id="ai-prompt" placeholder="Ej: Genera una serie de 10 pines sobre beneficios del ácido hialurónico..."></textarea>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" id="close-modal">Cancelar</button>
+                <button class="btn btn-primary" id="ai-generate-confirm">Generar con Gemini</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

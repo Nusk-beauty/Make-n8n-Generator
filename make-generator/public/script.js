@@ -8,6 +8,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let activeTab = 'natural';
 
+    window.setPrompt = (type) => {
+        const textarea = document.getElementById('prompt');
+        if (type === 'Pinterest Skincare') {
+            textarea.value = "Sistema de Pinterest Skincare Profesional con Tableros por IA. Sin Slides, sin APIs técnicas. Escenario 1: Gemini crea el calendario, define el Tablero ideal (Skincare Tips, Rutinas, etc) y genera prompts de alta calidad estética. Escenario 2: Busca pines pendientes, crea el tablero si no existe usando el módulo nativo de Pinterest, y publica el Pin usando la imagen de Pollinations.ai directamente. Máximo ahorro de operaciones (bajo 1000/mes).";
+        } else if (type === 'Auto-responder Gmail') {
+            textarea.value = "Cuando llegue un correo a Gmail, usa la IA para clasificarlo. Si es una duda técnica, responde educadamente y guarda el contacto en una hoja de Google Sheets. Si es spam, bórralo.";
+        } else if (type === 'Notificador Stocks') {
+            textarea.value = "Cada mañana a las 9:00, consulta el precio de las acciones de Apple y Tesla. Si han subido más de un 2%, envíame un mensaje por Telegram con un resumen.";
+        }
+    };
+
     // Tab switching
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {

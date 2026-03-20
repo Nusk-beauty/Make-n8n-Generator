@@ -1,0 +1,5 @@
+
+> make-automation-gen@1.0.0 start
+> node api/generate.js
+
+Backend running on port 3000

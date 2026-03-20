@@ -110,6 +110,28 @@ textarea {
     margin-bottom: 20px;
 }
 
+.template-chips {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.chip {
+    background: #f3f4f6;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    border: 1px solid transparent;
+}
+
+.chip:hover {
+    background: #e5e7eb;
+    border-color: var(--accent-color);
+}
+
 textarea:focus {
     outline: none;
     border-color: var(--primary);
